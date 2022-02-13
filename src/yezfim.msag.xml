@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>YEZFIM</ARBGB>
+    <MASTERLANG>3</MASTERLANG>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>000</MSGNR>
+     <TEXT>&amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>&amp; &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>&amp; &amp; &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>&amp; &amp; &amp; &amp;</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>004</MSGNR>
+     <TEXT>조건을 만족하는 데이터가 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>005</MSGNR>
+     <TEXT>ALV Container 를 생성할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>006</MSGNR>
+     <TEXT>필수 필드 &amp;1에 값을 입력하십시오.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>007</MSGNR>
+     <TEXT>처리가 완료되었습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>008</MSGNR>
+     <TEXT>발의부서 권한을 찾을 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>009</MSGNR>
+     <TEXT>수행을 취소하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>010</MSGNR>
+     <TEXT>&amp; 을(를) 선택하세요.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>011</MSGNR>
+     <TEXT>&amp; 은(는) 한건만 선택 가능합니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>012</MSGNR>
+     <TEXT>발의부서를 결정할 수 없습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>013</MSGNR>
+     <TEXT>데이터가 존재하지 않습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>014</MSGNR>
+     <TEXT>처리대상 자료가 존재하지 않습니다.</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

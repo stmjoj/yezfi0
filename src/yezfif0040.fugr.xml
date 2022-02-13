@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] Excel Template Download Using OLE</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LYEZFIF0040F01</SOBJ_NAME>
+    <SOBJ_NAME>LYEZFIF0040TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLYEZFIF0040</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Y_EZFI_EXCEL_TEMPLATE_DOWN_OLE</FUNCNAME>
+     <SHORT_TEXT>[FI] Excel Template Download Using OLE</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_PRGID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>PROGRAMM</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_TXTID</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>YEZ_TEXTID8</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_PRGID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>ABAP 프로그램 이름</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_TXTID</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>텍스트 ID ( 8자리 )</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

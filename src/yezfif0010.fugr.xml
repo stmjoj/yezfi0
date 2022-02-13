@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] 회사코드 권한 점검</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LYEZFIF0010TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLYEZFIF0010</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Y_EZFI_CHECK_BUKRS_AUTH</FUNCNAME>
+     <SHORT_TEXT>[FI] 회사코드 권한 점검</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>회사 코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>
