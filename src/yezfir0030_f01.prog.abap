@@ -44,7 +44,7 @@ FORM CHECK_BUKRS_AUTH .
 *----------------------------------------------------------------------*
 * 회사코드 권한 점검
 *----------------------------------------------------------------------*
-  CALL FUNCTION 'Y_FI_CHECK_BUKRS_AUTH'
+  CALL FUNCTION 'Y_EZFI_CHECK_BUKRS_AUTH'
     EXPORTING
       IV_BUKRS   = P_BUKRS
     IMPORTING
@@ -150,7 +150,7 @@ FORM CHECK_SUBLOGIN_PROC .
   DATA: LV_RETURN   TYPE BAPI_MTYPE.
   DATA: LV_MESSAGE  TYPE BAPI_MSG.
 
-  CALL FUNCTION 'Y_FI_SUBLOGIN'
+  CALL FUNCTION 'Y_EZFI_SUBLOGIN'
 *   EXPORTING
 *     IV_UNAME    = SY-UNAME
 *     IV_SKIP     = ABAP_TRUE
@@ -203,7 +203,7 @@ FORM GET_COMPANY_INFO .
 *----------------------------------------------------------------------*
 * 지역변수 선언 및 초기화
 *----------------------------------------------------------------------*
-  CALL FUNCTION 'Y_FI_GET_BUKRS_INFO'
+  CALL FUNCTION 'Y_EZFI_GET_BUKRS_INFO'
     EXPORTING
       IV_BUKRS   = P_BUKRS
     IMPORTING
@@ -225,7 +225,7 @@ ENDFORM.
 *----------------------------------------------------------------------*
 FORM EXCEL_TEMPLATE_DOWNLOAD .
 
-  CALL FUNCTION 'Y_FI_EXCEL_TEMPLATE_DOWN_OLE'
+  CALL FUNCTION 'Y_EZFI_EXCEL_TEMPLATE_DOWN_OLE'
     EXPORTING
       IV_PRGID = 'YFIR0030'
       IV_TXTID = SPACE.

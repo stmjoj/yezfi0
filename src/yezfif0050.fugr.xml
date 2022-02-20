@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_FUGR" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <AREAT>[FI] 전표 정보 추출</AREAT>
+   <INCLUDES>
+    <SOBJ_NAME>LYEZFIF0050F01</SOBJ_NAME>
+    <SOBJ_NAME>LYEZFIF0050TOP</SOBJ_NAME>
+    <SOBJ_NAME>SAPLYEZFIF0050</SOBJ_NAME>
+   </INCLUDES>
+   <FUNCTIONS>
+    <item>
+     <FUNCNAME>Y_EZFI_FI_DOCUMENT_READ</FUNCNAME>
+     <SHORT_TEXT>[FI] 전표 정보 추출</SHORT_TEXT>
+     <IMPORT>
+      <RSIMP>
+       <PARAMETER>IV_BUKRS</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BUKRS</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_BELNR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BELNR_D</TYP>
+      </RSIMP>
+      <RSIMP>
+       <PARAMETER>IV_GJAHR</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>GJAHR</TYP>
+      </RSIMP>
+     </IMPORT>
+     <EXPORT>
+      <RSEXP>
+       <PARAMETER>ES_BKPF</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>YEZFISBKPF</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MTYPE</TYP>
+      </RSEXP>
+      <RSEXP>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <REFERENCE>X</REFERENCE>
+       <TYP>BAPI_MSG</TYP>
+      </RSEXP>
+     </EXPORT>
+     <TABLES>
+      <RSTBL>
+       <PARAMETER>ET_BSEG</PARAMETER>
+       <DBSTRUCT>YEZFISBSEG</DBSTRUCT>
+      </RSTBL>
+     </TABLES>
+     <DOCUMENTATION>
+      <RSFDO>
+       <PARAMETER>IV_BUKRS</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>회사 코드</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_BELNR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>회계 전표 번호</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>IV_GJAHR</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>회계연도</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ES_BKPF</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[FI] BKPF Structure</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_RETURN</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 유형: S 성공, E 오류, W 경고, I 정보, A 중단</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>EV_MESSAGE</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>메시지 텍스트</STEXT>
+      </RSFDO>
+      <RSFDO>
+       <PARAMETER>ET_BSEG</PARAMETER>
+       <KIND>P</KIND>
+       <STEXT>[FI] BSEG Structure</STEXT>
+      </RSFDO>
+     </DOCUMENTATION>
+    </item>
+   </FUNCTIONS>
+  </asx:values>
+ </asx:abap>
+</abapGit>

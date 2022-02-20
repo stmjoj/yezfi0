@@ -97,6 +97,18 @@
      <MSGNR>014</MSGNR>
      <TEXT>처리대상 자료가 존재하지 않습니다.</TEXT>
     </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>015</MSGNR>
+     <TEXT>성공적으로 수행하였습니다.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>3</SPRSL>
+     <ARBGB>YEZFIM</ARBGB>
+     <MSGNR>016</MSGNR>
+     <TEXT>합계 항목은 클릭할 수 없습니다.</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>
