@@ -12,7 +12,7 @@ FORM CHECK_INPUT .
     GV_RETURN = 'E'.
 
     " 필수 필드 &1에 값을 입력하십시오.
-    MESSAGE S006(YFIM) INTO GV_MESSAGE.
+    MESSAGE S006(YEZFIM) INTO GV_MESSAGE.
     EXIT.
   ENDIF.
 

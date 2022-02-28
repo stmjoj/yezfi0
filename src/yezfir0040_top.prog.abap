@@ -46,6 +46,7 @@ DATA: GS_SUBLOGIN         TYPE YEZFIS0040.             " Sublogin Info
 DATA: GS_BUKRS            TYPE YEZFIS0020.             " 회사코드 정보
 DATA: GV_BSTAT            TYPE BKPF-BSTAT.             " 전표 상태
 DATA: GV_BUZEI            TYPE BUZEI.                  " 회계 전표의 개별 항목 번호
+DATA: GV_CALLD            TYPE ABAP_BOOL.              " 타프로그램 호출 여부
 
 DATA: GT_OUTTAB           TYPE STANDARD TABLE OF YEZFIS0080.
 DATA: GS_OUTTAB           TYPE YEZFIS0080.

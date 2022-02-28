@@ -30,6 +30,10 @@ FORM SELECT_FIELDCAT_PROC  TABLES   PT_FIELDCAT STRUCTURE YEZFIS1010
          A~NO_OUT     AS NO_OUT
          A~TECH       AS TECH
          B~REPTEXT    AS REPTEXT
+         A~SPOS       AS SPOS
+         A~UP         AS UP
+         A~DOWN       AS DOWN
+         A~SUBTOT     AS SUBTOT
     INTO CORRESPONDING FIELDS OF TABLE PT_FIELDCAT
     FROM YEZFIT1010 AS A LEFT OUTER JOIN
          YEZFIT1020 AS B
@@ -43,6 +47,33 @@ FORM SELECT_FIELDCAT_PROC  TABLES   PT_FIELDCAT STRUCTURE YEZFIS1010
      AND A~SCRFNAME = PV_SCRFNAME.
 
   SORT PT_FIELDCAT[] BY COL_POS.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  SELECT_SORT_ORDER_PROC
+*&---------------------------------------------------------------------*
+*       화면 별 ALV SORT ORDER 가져오기
+*----------------------------------------------------------------------*
+FORM SELECT_SORT_ORDER_PROC  TABLES   PT_SORT STRUCTURE YEZFIS1020
+                             USING    PV_PROGNAME
+                                      PV_DYNNUMB
+                                      PV_SCRFNAME.
+
+  CLEAR: PT_SORT[].
+
+  SELECT SPOS
+         FIELDNAME
+         UP
+         DOWN
+         SUBTOT
+    INTO CORRESPONDING FIELDS OF TABLE PT_SORT
+    FROM YEZFIT1010
+   WHERE PROGNAME = PV_PROGNAME
+     AND DYNNUMB  = PV_DYNNUMB
+     AND SCRFNAME = PV_SCRFNAME.
+
+  SORT PT_SORT[] BY SPOS.
 
 ENDFORM.
 

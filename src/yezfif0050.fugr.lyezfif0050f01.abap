@@ -96,11 +96,19 @@ FORM PARKING_DOCUMENT_READ .
   DATA: LT_VBSET   TYPE STANDARD TABLE OF FVBSET.
 
   DATA: LS_VBSEG   TYPE FVBSEG.
-  DATA: LS_VBSEG_T TYPE FVBSEG.
   DATA: LS_MWSKZ   TYPE YEZFIS0090.
 
+  DATA: BEGIN OF LS_KRVAT,
+          WMWST   TYPE FVBSEG-WMWST,      " 세액(전표 통화)
+          MWSTS   TYPE FVBSEG-MWSTS,      " 세액(현지 통화)
+          XNEGP   TYPE FVBSEG-XNEGP,      " 지시자: 마이너스 전기
+          SGTXT   TYPE FVBSEG-SGTXT,      " 품목텍스트
+          MWSKZ   TYPE FVBSEG-MWSKZ,      " 부가가치세 코드
+          BUPLA   TYPE FVBSEG-BUPLA,      " 사업장
+          SHKZG   TYPE FVBSEG-SHKZG,      " 차변/대변 지시자
+        END OF LS_KRVAT.
+
   DATA: LV_COUNT   TYPE I.
-  DATA: LV_MWSKZ   TYPE MWSKZ.
 
 *----------------------------------------------------------------------*
 * 지역변수 초기화
@@ -111,11 +119,10 @@ FORM PARKING_DOCUMENT_READ .
   CLEAR: LT_VBSET[].
 
   CLEAR: LS_VBSEG.
-  CLEAR: LS_VBSEG_T.
   CLEAR: LS_MWSKZ.
+  CLEAR: LS_KRVAT.
 
   CLEAR: LV_COUNT.
-  CLEAR: LV_MWSKZ.
 
 *----------------------------------------------------------------------*
 * 임시전표 READ
@@ -149,9 +156,19 @@ FORM PARKING_DOCUMENT_READ .
 
 *     세액 존재여부 확인
       IF ( LS_VBSEG-WMWST IS NOT INITIAL ).
-        LV_MWSKZ = LS_VBSEG-MWSKZ.
+*       세액이 입력된 고객 또는 구매처 개별항목 정보를 Move
+        LS_KRVAT-WMWST = LS_VBSEG-WRBTR.      " 세액(전표 통화)
+        LS_KRVAT-MWSTS = LS_VBSEG-DMBTR.      " 세액(현지 통화)
+        LS_KRVAT-XNEGP = LS_VBSEG-XNEGP.      " 지시자: 마이너스 전기
+        LS_KRVAT-SGTXT = LS_VBSEG-SGTXT.      " 품목텍스트
+        LS_KRVAT-MWSKZ = LS_VBSEG-MWSKZ.      " 부가가치세 코드
+        LS_KRVAT-BUPLA = LS_VBSEG-BUPLA.      " 사업장
 
-        MOVE-CORRESPONDING LS_VBSEG TO LS_VBSEG_T.
+        IF ( LS_VBSEG-SHKZG = 'S' ).
+          LS_KRVAT-SHKZG = 'H'.                   " 차변/대변 지시자
+        ELSE.
+          LS_KRVAT-SHKZG = 'S'.                   " 차변/대변 지시자
+        ENDIF.
       ENDIF.
     ENDLOOP.
 
@@ -162,39 +179,43 @@ FORM PARKING_DOCUMENT_READ .
 * 임시전표 세금 개별항목 추가
 *----------------------------------------------------------------------*
 * 세액 > 0
-  CHECK ( LV_MWSKZ IS NOT INITIAL ).
+  CHECK ( LS_KRVAT-MWSKZ IS NOT INITIAL ).
 
 * 세금코드 정보 READ
   CALL FUNCTION 'Y_EZFI_TAX_SHOW_MWSKZ'
     EXPORTING
       I_BUKRS         = GS_BKPF-BUKRS
-      I_MWSKZ         = LV_MWSKZ
+      I_MWSKZ         = LS_KRVAT-MWSKZ
       I_SHOW_INACTIVE = ' '
     IMPORTING
       ES_MWSKZ        = LS_MWSKZ.
 
-* 매입세액
-  IF ( LS_MWSKZ-KTOSL = 'VST' ).
-    GS_BSEG-BUKRS     = GS_BKPF-BUKRS.
-    GS_BSEG-BELNR     = GS_BKPF-BELNR.
-    GS_BSEG-GJAHR     = GS_BKPF-GJAHR.
-    GS_BSEG-BUZEI     = LV_COUNT + 1.
-    GS_BSEG-BUZID     = 'T'.
-    GS_BSEG-HKONT     = LS_MWSKZ-HKONT.
+* 매입세액 불공제
+  IF ( LS_MWSKZ-KTOSL = 'NVV' ).
+    LOOP AT LT_VBSEG INTO LS_VBSEG.
+*     세금코드가 동일한 일반G/L계정 또는 고정자산 계정 대상
+      CHECK ( LS_VBSEG-MWSKZ = LS_KRVAT-MWSKZ )
+        AND ( ( LS_VBSEG-KOART = 'S' ) OR ( LS_VBSEG-KOART = 'A' ) ).
 
-    GS_BSEG-WRBTR     = LS_VBSEG_T-WMWST.
-    GS_BSEG-DMBTR     = LS_VBSEG_T-MWSTS.
-    GS_BSEG-XNEGP     = LS_VBSEG_T-XNEGP.
-    GS_BSEG-SGTXT     = LS_VBSEG_T-SGTXT.
-    GS_BSEG-KOART     = 'S'.
-    GS_BSEG-MWSKZ     = LS_VBSEG_T-MWSKZ.
-    GS_BSEG-BUPLA     = LS_VBSEG_T-BUPLA.
 
-    IF ( LS_VBSEG_T-SHKZG = 'S' ).
-      GS_BSEG-SHKZG = 'H'.
-    ELSE.
-      GS_BSEG-SHKZG = 'S'.
-    ENDIF.
+    ENDLOOP.
+* 매입세액 공제
+  ELSEIF ( LS_MWSKZ-KTOSL = 'VST' ).
+    GS_BSEG-BUKRS = GS_BKPF-BUKRS.         " 회사 코드
+    GS_BSEG-BELNR = GS_BKPF-BELNR.         " 회계 전표 번호
+    GS_BSEG-GJAHR = GS_BKPF-GJAHR.         " 회계연도
+    GS_BSEG-BUZEI = LV_COUNT + 1.          " 회계 전표의 개별 항목 번호
+    GS_BSEG-BUZID = 'T'.                   " 개별 항목 ID
+    GS_BSEG-HKONT = LS_MWSKZ-HKONT.        " 총계정원장계정
+
+    GS_BSEG-WRBTR = LS_KRVAT-WMWST.        " 금액(전표 통화)
+    GS_BSEG-DMBTR = LS_KRVAT-MWSTS.        " 금액(현지 통화)
+    GS_BSEG-XNEGP = LS_KRVAT-XNEGP.        " 지시자: 마이너스 전기
+    GS_BSEG-SGTXT = LS_KRVAT-SGTXT.        " 품목텍스트
+    GS_BSEG-KOART = 'S'.                   " 계정 유형
+    GS_BSEG-MWSKZ = LS_KRVAT-MWSKZ.        " 부가가치세 코드
+    GS_BSEG-BUPLA = LS_KRVAT-BUPLA.        " 사업장
+    GS_BSEG-SHKZG = LS_KRVAT-SHKZG.        " 차변/대변 지시자
 
     APPEND GS_BSEG TO GT_BSEG.
     CLEAR GS_BSEG.

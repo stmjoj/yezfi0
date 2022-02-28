@@ -24,7 +24,7 @@ FORM CHECK_SUBLOGIN_PROC .
       EV_MESSAGE  = LV_MESSAGE.
 
   IF ( LV_RETURN <> 'S' ).
-    MESSAGE E012(YFIM).    " 발의부서를 결정할 수 없습니다.
+    MESSAGE E012(YEZFIM).    " 발의부서를 결정할 수 없습니다.
     LEAVE PROGRAM.
   ENDIF.
 
@@ -140,7 +140,7 @@ FORM GET_COMPANY_INFO .
       ES_BUKRS   = GS_BUKRS.
 
   IF ( LV_RETURN <> 'S' ).
-    MESSAGE I000(YFIM) WITH LV_MESSAGE DISPLAY LIKE 'E'.
+    MESSAGE I000(YEZFIM) WITH LV_MESSAGE DISPLAY LIKE 'E'.
     LEAVE PROGRAM.
   ENDIF.
 
@@ -164,6 +164,7 @@ FORM INIT_PROC .
   CLEAR: GS_BUKRS.
   CLEAR: GV_BSTAT.
   CLEAR: GV_BUZEI.
+  CLEAR: GV_CALLD.
 
   CLEAR: GT_OUTTAB[].
   CLEAR: GS_OUTTAB.
@@ -226,6 +227,15 @@ FORM GET_BELNR_PARAMETER .
     CLEAR: YEZFIS0060-BELNR.
     CLEAR: YEZFIS0060-GJAHR.
   ENDIF.
+
+*----------------------------------------------------------------------*
+* 타프로그램 호출 여부
+*----------------------------------------------------------------------*
+* 타프로그램 호출 여부 가져 오기
+  GET PARAMETER ID 'YEZ_CALLD' FIELD GV_CALLD.
+
+* 가져온 후 CLEAR
+  SET PARAMETER ID 'YEZ_CALLD' FIELD ABAP_FALSE.
 
 ENDFORM.
 

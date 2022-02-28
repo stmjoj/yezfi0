@@ -1,27 +1,32 @@
 ************************************************************************
-* Program ID  : YEZFIR0040
-* Title       : [FI] 전표조회
+* Program ID  : YEZFIR0050
+* Title       : [FI] 총계정원장 조회
 * Module      : FI
 * Type        : Report
-* Description : 개별 전표에 대한 조회
+* Description : G/L계정 별 총계정원장 조회
 ************************************************************************
 
 *----------------------------------------------------------------------*
 * INCLUDES
 *----------------------------------------------------------------------*
-INCLUDE YEZFIR0040_TOP.
-INCLUDE YEZFIR0040_C01.
-INCLUDE YEZFIR0040_F01.
-INCLUDE YEZFIR0040_F02.
-INCLUDE YEZFIR0040_O01.
-INCLUDE YEZFIR0040_I01.
-INCLUDE YEZFIR0040_H01.
+INCLUDE YEZFIR0050_TOP.
+INCLUDE YEZFIR0050_C01.
+INCLUDE YEZFIR0050_F01.
+INCLUDE YEZFIR0050_F02.
+INCLUDE YEZFIR0050_O01.
+INCLUDE YEZFIR0050_I01.
 
 *----------------------------------------------------------------------*
 * INITIALIZATION
 *----------------------------------------------------------------------*
 INITIALIZATION.
   PERFORM INITIALIZATION.
+
+*----------------------------------------------------------------------*
+* AT SELECTION-SCREEN                                                  *
+*----------------------------------------------------------------------*
+AT SELECTION-SCREEN OUTPUT.
+  PERFORM MODIFY_SELSCR_PROC.
 
 *----------------------------------------------------------------------*
 * START-OF-SELECTION
@@ -31,8 +36,8 @@ START-OF-SELECTION.
 * 초기화
   PERFORM INIT_PROC.
 
-* 전표 초기값 설정
-  PERFORM GET_BELNR_PARAMETER.
+* 개별항목 자료 선택 및 구성
+  PERFORM MAKE_OUTTAB_PROC.
 
 * 전표번호 선택화면 호출
   PERFORM CALL_SCREEN_0100.

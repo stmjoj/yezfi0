@@ -29,7 +29,7 @@ FORM GET_EMPNO_FROM_UNAME .
   IF ( GT_EMP[] IS INITIAL ).
     GV_RETURN = 'E'.
     " 발의부서 권한을 찾을 수 없습니다.
-    MESSAGE S008(YFIM) INTO GV_MESSAGE.
+    MESSAGE S008(YEZFIM) INTO GV_MESSAGE.
     EXIT.
   ENDIF.
 
@@ -84,7 +84,7 @@ FORM SET_ISSUER_INFO .
     GV_RETURN = 'S'.
 
     " 처리가 완료되었습니다.
-    MESSAGE S007(YFIM) INTO GV_MESSAGE.
+    MESSAGE S007(YEZFIM) INTO GV_MESSAGE.
 *----------------------------------------------------------------------*
 * SAP User ID : 사원정보 = 1 : N
 *----------------------------------------------------------------------*
@@ -206,7 +206,7 @@ FORM CANCEL_SELECT_EMPNO.
     LEAVE TO SCREEN 0.
   ELSE.
     " 수행을 취소하였습니다.
-    MESSAGE S001(YFIM).
+    MESSAGE S001(YEZFIM).
   ENDIF.
 
 ENDFORM.
@@ -249,7 +249,7 @@ FORM CANCEL_SELECT_AUTH .
       GV_MESSAGE = TEXT-007.           " 발의부서 선택을 취소하였습니다.
     ELSE.
       " 수행을 취소하였습니다.
-      MESSAGE S001(YFIM).
+      MESSAGE S001(YEZFIM).
       EXIT.
     ENDIF.
   ENDIF.
@@ -432,14 +432,14 @@ FORM AUTH_SELECT_EVENT .
 * 선택한 건이 없는 경우
   IF ( LV_SELECT_COUNT = 0 ).
     " & 을(를) 선택하세요.
-    MESSAGE S010(YFIM) WITH TEXT-008.              " 발의부서
+    MESSAGE S010(YEZFIM) WITH TEXT-008.              " 발의부서
     EXIT.
   ENDIF.
 
 * 선택한 건이 여러건인 경우
   IF ( LV_SELECT_COUNT > 1 ).
     " & 은(는) 한건만 선택 가능합니다.
-    MESSAGE S011(YFIM) WITH TEXT-008.              " 발의부서
+    MESSAGE S011(YEZFIM) WITH TEXT-008.              " 발의부서
     EXIT.
   ENDIF.
 
@@ -465,7 +465,7 @@ FORM AUTH_SELECT_EVENT .
       GV_RETURN = 'S'.
 
       " 처리가 완료되었습니다.
-      MESSAGE S007(YFIM) INTO GV_MESSAGE.
+      MESSAGE S007(YEZFIM) INTO GV_MESSAGE.
     ELSE.
       UPDATE YEZFIT0011
          SET ACTIV = ABAP_FALSE
@@ -608,7 +608,7 @@ FORM CHECK_SUBLOGIN .
       GV_RETURN = 'S'.
 
       " 처리가 완료되었습니다.
-      MESSAGE S007(YFIM) INTO GV_MESSAGE.
+      MESSAGE S007(YEZFIM) INTO GV_MESSAGE.
     ENDIF.
   ENDIF.
 

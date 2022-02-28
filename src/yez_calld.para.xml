@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_PARA" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <TPARA>
+    <PARAMID>YEZ_CALLD</PARAMID>
+   </TPARA>
+   <TPARAT>
+    <PARAMID>YEZ_CALLD</PARAMID>
+    <SPRACHE>3</SPRACHE>
+    <PARTEXT>[SET/GET 매개변수] 타프로그램 호출</PARTEXT>
+   </TPARAT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

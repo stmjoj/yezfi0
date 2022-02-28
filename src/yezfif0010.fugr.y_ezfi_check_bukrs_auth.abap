@@ -31,7 +31,7 @@ FUNCTION Y_EZFI_CHECK_BUKRS_AUTH.
   IF ( SY-SUBRC = 0 ).
     EV_RETURN = 'S'.
     " 처리가 완료되었습니다.
-    MESSAGE S007(YFIM) INTO EV_MESSAGE.
+    MESSAGE S007(YEZFIM) INTO EV_MESSAGE.
   ELSE.
     EV_RETURN = 'E'.
     " 회사코드 &에 대한 권한이 없습니다.
