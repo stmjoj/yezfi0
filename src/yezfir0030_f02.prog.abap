@@ -79,144 +79,144 @@ FORM SET_ALV_FIELDCAT_0100 .
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'STATU',
              GS_FCAT_0100   ' '         'KEY'          'X',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'STATU',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T22,      " 상태
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'PRTYP',
              GS_FCAT_0100   ' '         'KEY'          'X',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'PRTYP',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T21,      " 처리유형
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'SAKNR',
              GS_FCAT_0100   ' '         'KEY'          'X',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'SAKNR',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T02,      " G/L 계정
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'TXT20',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'TXT20',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T03,      " 내역
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'TXT50',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'TXT50',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T04,      " G/L 계정 설명
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'XBILK',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'XBILK',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T05,      " 대차대조표 계정
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'GVTYP',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'GVTYP',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T06,      " 손익계산서 계정 유형
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'KTOKS',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'KTOKS',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T07,      " 계정 그룹
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'WAERS',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'WAERS',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T08,      " 계정 통화
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'XSALH',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'XSALH',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T09,      " 잔액(현지 통화)만
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'MWSKZ',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'MWSKZ',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T10,      " 세금 범주
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'XMWNO',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'XMWNO',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T11,      " 세금 없이 전기 허용
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'MITKZ',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'MITKZ',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T12,      " 계정 유형에 대한 조정 계정
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'ALTKT',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'ALTKT',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T13,      " 대체 계정 번호
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'WMETH',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'WMETH',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T14,      " 외부 시스템에서 관리되는 계정
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'XOPVW',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'XOPVW',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T15,      " 미결 항목 관리
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'XKRES',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'XKRES',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T16,      " 개별 항목 조회
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'ZUAWA',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'ZUAWA',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T17,      " 정렬 키
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'FSTAG',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'FSTAG',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T18,      " 필드상태그룹
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'XINTB',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'XINTB',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T19,      " 자동 전기만
 
              GS_FCAT_0100   'S'         'FIELDNAME'    'XMITK',
              GS_FCAT_0100   ' '         'KEY'          ' ',
-             GS_FCAT_0100   ' '         'REF_TABLE'    'YFIS0050',
+             GS_FCAT_0100   ' '         'REF_TABLE'    'YEZFIS0050',
              GS_FCAT_0100   ' '         'REF_FIELD'    'XMITK',
              GS_FCAT_0100   ' '         'JUST'         'C',
              GS_FCAT_0100   'E'         'REPTEXT'      TEXT-T20.      " 조정 계정 입력 가능

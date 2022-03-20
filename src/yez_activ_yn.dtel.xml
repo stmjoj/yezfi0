@@ -6,7 +6,15 @@
     <ROLLNAME>YEZ_ACTIV_YN</ROLLNAME>
     <DDLANGUAGE>3</DDLANGUAGE>
     <DOMNAME>YEZ_FLAG</DOMNAME>
+    <HEADLEN>55</HEADLEN>
+    <SCRLEN1>10</SCRLEN1>
+    <SCRLEN2>20</SCRLEN2>
+    <SCRLEN3>40</SCRLEN3>
     <DDTEXT>활성화 여부 ( &apos;X&apos; :활성화, &apos; &apos; : 비활성화 )</DDTEXT>
+    <REPTEXT>활성화 여부</REPTEXT>
+    <SCRTEXT_S>활성화 여부</SCRTEXT_S>
+    <SCRTEXT_M>활성화 여부</SCRTEXT_M>
+    <SCRTEXT_L>활성화 여부</SCRTEXT_L>
     <DTELMASTER>3</DTELMASTER>
     <REFKIND>D</REFKIND>
    </DD04V>

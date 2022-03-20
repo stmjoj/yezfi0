@@ -6,6 +6,47 @@
 REPORT YEZFIS0010.
 
 *&---------------------------------------------------------------------*
+*&      Form  SET_FIELDCAT_PROC
+*&---------------------------------------------------------------------*
+*       화면 별 FIELD CATALOG 구성
+*----------------------------------------------------------------------*
+FORM SET_FIELDCAT_PROC  TABLES   PT_FIELDCAT STRUCTURE LVC_S_FCAT
+                        USING    PV_PROGNAME
+                                 PV_DYNNUMB
+                                 PV_SCRFNAME.
+
+  DATA: LT_FIELDCAT   TYPE STANDARD TABLE OF YEZFIS1010.
+  DATA: LS_FIELDCAT   TYPE YEZFIS1010.
+  DATA: LS_FCAT       TYPE LVC_S_FCAT.
+
+  PERFORM SELECT_FIELDCAT_PROC TABLES LT_FIELDCAT[]
+                               USING  PV_PROGNAME
+                                      PV_DYNNUMB
+                                      PV_SCRFNAME.
+
+  LOOP AT LT_FIELDCAT INTO LS_FIELDCAT.
+    PERFORM FILL_FIELDCAT IN PROGRAM YEZFIS0010
+                          TABLES PT_FIELDCAT USING:
+             " STRUCTURE START/END   FIELDNAME      VALUE
+               LS_FCAT   'S'         'COL_POS'      LS_FIELDCAT-COL_POS,
+               LS_FCAT   ' '         'FIELDNAME'    LS_FIELDCAT-FIELDNAME,
+               LS_FCAT   ' '         'KEY'          LS_FIELDCAT-KEY_FIELD,
+               LS_FCAT   ' '         'REF_TABLE'    LS_FIELDCAT-REF_TABLE,
+               LS_FCAT   ' '         'REF_FIELD'    LS_FIELDCAT-REF_FIELD,
+               LS_FCAT   ' '         'CFIELDNAME'   LS_FIELDCAT-CFIELDNAME,
+               LS_FCAT   ' '         'CHECKBOX'     LS_FIELDCAT-CHECKBOX,
+               LS_FCAT   ' '         'HOTSPOT'      LS_FIELDCAT-HOTSPOT,
+               LS_FCAT   ' '         'JUST'         LS_FIELDCAT-JUST,
+               LS_FCAT   ' '         'DO_SUM'       LS_FIELDCAT-DO_SUM,
+               LS_FCAT   ' '         'NO_OUT'       LS_FIELDCAT-NO_OUT,
+               LS_FCAT   ' '         'TECH'         LS_FIELDCAT-TECH,
+               LS_FCAT   ' '         'F4AVAILABL'   LS_FIELDCAT-F4AVAILABL,
+               LS_FCAT   'E'         'REPTEXT'      LS_FIELDCAT-REPTEXT.
+  ENDLOOP.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
 *&      Form  SELECT_FIELDCAT_PROC
 *&---------------------------------------------------------------------*
 *       화면 별 FIELD CATALOG 가져오기
@@ -29,6 +70,7 @@ FORM SELECT_FIELDCAT_PROC  TABLES   PT_FIELDCAT STRUCTURE YEZFIS1010
          A~DO_SUM     AS DO_SUM
          A~NO_OUT     AS NO_OUT
          A~TECH       AS TECH
+         A~F4AVAILABL AS F4AVAILABL
          B~REPTEXT    AS REPTEXT
          A~SPOS       AS SPOS
          A~UP         AS UP
@@ -47,6 +89,37 @@ FORM SELECT_FIELDCAT_PROC  TABLES   PT_FIELDCAT STRUCTURE YEZFIS1010
      AND A~SCRFNAME = PV_SCRFNAME.
 
   SORT PT_FIELDCAT[] BY COL_POS.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  SET_SORTORDER_PROC
+*&---------------------------------------------------------------------*
+*       화면 별 FIELD CATALOG 구성
+*----------------------------------------------------------------------*
+FORM SET_SORTORDER_PROC  TABLES   PT_SORT STRUCTURE LVC_S_SORT
+                         USING    PV_PROGNAME
+                                  PV_DYNNUMB
+                                  PV_SCRFNAME.
+
+  DATA: LT_SORT   TYPE STANDARD TABLE OF YEZFIS1020.
+  DATA: LS_SORT   TYPE YEZFIS1020.
+
+  PERFORM SELECT_SORT_ORDER_PROC TABLES LT_SORT[]
+                                 USING  PV_PROGNAME
+                                        PV_DYNNUMB
+                                        PV_SCRFNAME.
+
+  LOOP AT LT_SORT INTO LS_SORT.
+    CHECK ( LS_SORT-SPOS IS NOT INITIAL ).
+
+    PERFORM FILL_ALV_SORT TABLES  PT_SORT USING:
+             LS_SORT-SPOS              " SPOS
+             LS_SORT-FIELDNAME         " FIELDNAME
+             LS_SORT-UP                " UP
+             LS_SORT-DOWN              " DOWN
+             LS_SORT-SUBTOT.           " SUBTOT
+  ENDLOOP.
 
 ENDFORM.
 
@@ -124,5 +197,45 @@ FORM FILL_FIELDCAT  TABLES   PT_FCAT   STRUCTURE LVC_S_FCAT
   IF ( PV_GUBUN = 'E' ).
     APPEND PS_FCAT TO PT_FCAT.
   ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  FILL_ALV_SORT
+*&---------------------------------------------------------------------*
+*       ALV 정렬기준 구성
+*----------------------------------------------------------------------*
+*      <--PT_SORT
+*      -->PV_SPOS
+*      -->PV_FIELDNAME
+*      -->PV_UP
+*      -->PV_DOWN
+*      -->PV_SUBTOT
+*----------------------------------------------------------------------*
+FORM FILL_ALV_SORT  TABLES   PT_SORT   STRUCTURE LVC_S_SORT
+                    USING    VALUE(PV_SPOS)
+                             VALUE(PV_FIELDNAME)
+                             VALUE(PV_UP)
+                             VALUE(PV_DOWN)
+                             VALUE(PV_SUBTOT).
+
+*----------------------------------------------------------------------*
+* 지역변수 선언 및 초기화
+*----------------------------------------------------------------------*
+  DATA: LS_SORT   TYPE LVC_S_SORT.
+
+  CLEAR: LS_SORT.
+
+*----------------------------------------------------------------------*
+* 정렬순서 지정
+*----------------------------------------------------------------------*
+  LS_SORT-SPOS      = PV_SPOS.
+  LS_SORT-FIELDNAME = PV_FIELDNAME.
+  LS_SORT-UP        = PV_UP.
+  LS_SORT-DOWN      = PV_DOWN.
+  LS_SORT-SUBTOT    = PV_SUBTOT.
+
+  APPEND LS_SORT TO PT_SORT.
+  CLEAR: LS_SORT.
 
 ENDFORM.

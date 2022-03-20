@@ -30,10 +30,10 @@
        <TYPE>CUST_CTRL</TYPE>
        <NAME>CON_0100</NAME>
        <ELEMENT_OF>SCREEN</ELEMENT_OF>
-       <LINE>005</LINE>
+       <LINE>006</LINE>
        <COLUMN>001</COLUMN>
        <LENGTH>255</LENGTH>
-       <HEIGHT>196</HEIGHT>
+       <HEIGHT>195</HEIGHT>
        <C_RESIZE_V>X</C_RESIZE_V>
        <C_RESIZE_H>X</C_RESIZE_H>
        <C_LINE_MIN>015</C_LINE_MIN>
@@ -51,7 +51,7 @@
        <COLUMN>001</COLUMN>
        <LENGTH>070</LENGTH>
        <VISLENGTH>070</VISLENGTH>
-       <HEIGHT>004</HEIGHT>
+       <HEIGHT>005</HEIGHT>
        <FORMAT>CHAR</FORMAT>
        <REQU_ENTRY>N</REQU_ENTRY>
       </RPY_DYFATC>
@@ -155,6 +155,40 @@
       <RPY_DYFATC>
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEXT</TYPE>
+       <NAME>YEZFIS0110-DTCNT</NAME>
+       <TEXT>데이터_건수_________</TEXT>
+       <LINE>004</LINE>
+       <COLUMN>003</COLUMN>
+       <LENGTH>015</LENGTH>
+       <VISLENGTH>015</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <MODIFIC>F</MODIFIC>
+       <REQU_ENTRY>N</REQU_ENTRY>
+       <LABELLEFT>X</LABELLEFT>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEMPLATE</TYPE>
+       <NAME>YEZFIS0110-DTCNT</NAME>
+       <LINE>004</LINE>
+       <COLUMN>019</COLUMN>
+       <LENGTH>010</LENGTH>
+       <VISLENGTH>010</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>INT4</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <OUTPUT_FLD>X</OUTPUT_FLD>
+       <REQU_ENTRY>N</REQU_ENTRY>
+       <RIGHT_JUST>X</RIGHT_JUST>
+       <DICT_I_SGN>X</DICT_I_SGN>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>OKCODE</TYPE>
        <NAME>OK_CODE</NAME>
        <TEXT>____________________</TEXT>
@@ -202,7 +236,7 @@
       <ACTCODE>000001</ACTCODE>
       <PFKCODE>000001</PFKCODE>
       <BUTCODE>0001</BUTCODE>
-      <INT_NOTE>400번 화면 상태</INT_NOTE>
+      <INT_NOTE>100번 화면 상태</INT_NOTE>
      </RSMPE_STAT>
     </STA>
     <FUN>
@@ -391,6 +425,13 @@
     <item>
      <ID>S</ID>
      <KEY>S_HKONT</KEY>
+     <ENTRY>.</ENTRY>
+     <LENGTH>9</LENGTH>
+     <SPLIT>D</SPLIT>
+    </item>
+    <item>
+     <ID>S</ID>
+     <KEY>S_XBLNR</KEY>
      <ENTRY>.</ENTRY>
      <LENGTH>9</LENGTH>
      <SPLIT>D</SPLIT>

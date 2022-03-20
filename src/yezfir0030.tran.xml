@@ -14,7 +14,7 @@
    <TSTCT>
     <SPRSL>3</SPRSL>
     <TCODE>YEZFIR0030</TCODE>
-    <TTEXT>[FI] G/L 계정 업로드</TTEXT>
+    <TTEXT>[FI] G/L계정 업로드</TTEXT>
    </TSTCT>
   </asx:values>
  </asx:abap>

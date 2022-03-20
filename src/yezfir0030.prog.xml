@@ -46,25 +46,11 @@
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>FRAME</TYPE>
        <NAME>%#AUTOTEXT001</NAME>
-       <TEXT>발의자정보________________________________________________________________</TEXT>
+       <TEXT>기본정보___________________________________________________________________________</TEXT>
        <LINE>001</LINE>
        <COLUMN>001</COLUMN>
-       <LENGTH>070</LENGTH>
-       <VISLENGTH>070</VISLENGTH>
-       <HEIGHT>005</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <REQU_ENTRY>N</REQU_ENTRY>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>FRAME</TYPE>
-       <NAME>%#AUTOTEXT002</NAME>
-       <TEXT>기본_정보________________________________________________________________</TEXT>
-       <LINE>001</LINE>
-       <COLUMN>071</COLUMN>
-       <LENGTH>070</LENGTH>
-       <VISLENGTH>070</VISLENGTH>
+       <LENGTH>080</LENGTH>
+       <VISLENGTH>080</VISLENGTH>
        <HEIGHT>005</HEIGHT>
        <FORMAT>CHAR</FORMAT>
        <REQU_ENTRY>N</REQU_ENTRY>
@@ -118,14 +104,15 @@
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEXT</TYPE>
-       <NAME>GV_TOT_CNT</NAME>
-       <TEXT>업로드_건수_________</TEXT>
+       <NAME>T001-BUKRS</NAME>
        <LINE>002</LINE>
-       <COLUMN>075</COLUMN>
+       <COLUMN>056</COLUMN>
        <LENGTH>015</LENGTH>
        <VISLENGTH>015</VISLENGTH>
        <HEIGHT>001</HEIGHT>
        <FORMAT>CHAR</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <MODIFIC>2</MODIFIC>
        <REQU_ENTRY>N</REQU_ENTRY>
        <LABELLEFT>X</LABELLEFT>
       </RPY_DYFATC>
@@ -133,60 +120,15 @@
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEMPLATE</TYPE>
-       <NAME>GV_TOT_CNT</NAME>
-       <TEXT>___________</TEXT>
+       <NAME>T001-BUKRS</NAME>
        <LINE>002</LINE>
-       <COLUMN>091</COLUMN>
-       <LENGTH>011</LENGTH>
-       <VISLENGTH>011</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>INT4</FORMAT>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <REQU_ENTRY>N</REQU_ENTRY>
-       <RIGHT_JUST>X</RIGHT_JUST>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEXT</TYPE>
-       <NAME>GS_SUBLOGIN-EMPNO</NAME>
-       <TEXT>발의자사번__________</TEXT>
-       <LINE>003</LINE>
-       <COLUMN>003</COLUMN>
-       <LENGTH>015</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
+       <COLUMN>072</COLUMN>
+       <LENGTH>004</LENGTH>
+       <VISLENGTH>004</VISLENGTH>
        <HEIGHT>001</HEIGHT>
        <FORMAT>CHAR</FORMAT>
-       <REQU_ENTRY>N</REQU_ENTRY>
-       <LABELLEFT>X</LABELLEFT>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>GS_SUBLOGIN-EMPNO</NAME>
-       <TEXT>_______________</TEXT>
-       <LINE>003</LINE>
-       <COLUMN>019</COLUMN>
-       <LENGTH>015</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <REQU_ENTRY>N</REQU_ENTRY>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>GS_SUBLOGIN-EMPNM</NAME>
-       <TEXT>______________________________</TEXT>
-       <LINE>003</LINE>
-       <COLUMN>035</COLUMN>
-       <LENGTH>030</LENGTH>
-       <VISLENGTH>030</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <PARAM_ID>BUK</PARAM_ID>
        <OUTPUT_FLD>X</OUTPUT_FLD>
        <REQU_ENTRY>N</REQU_ENTRY>
       </RPY_DYFATC>
@@ -197,7 +139,7 @@
        <NAME>GV_UPD_CNT</NAME>
        <TEXT>처리대상_건수________</TEXT>
        <LINE>003</LINE>
-       <COLUMN>075</COLUMN>
+       <COLUMN>003</COLUMN>
        <LENGTH>015</LENGTH>
        <VISLENGTH>015</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -212,7 +154,7 @@
        <NAME>GV_UPD_CNT</NAME>
        <TEXT>___________</TEXT>
        <LINE>003</LINE>
-       <COLUMN>091</COLUMN>
+       <COLUMN>019</COLUMN>
        <LENGTH>011</LENGTH>
        <VISLENGTH>011</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -225,46 +167,67 @@
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEXT</TYPE>
-       <NAME>GS_SUBLOGIN-ORGCD</NAME>
-       <TEXT>발의부서코드_________</TEXT>
-       <LINE>004</LINE>
-       <COLUMN>003</COLUMN>
+       <NAME>%#AUTOTEXT004</NAME>
+       <TEXT>/</TEXT>
+       <LINE>003</LINE>
+       <COLUMN>031</COLUMN>
+       <LENGTH>001</LENGTH>
+       <VISLENGTH>001</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEMPLATE</TYPE>
+       <NAME>GV_TOT_CNT</NAME>
+       <TEXT>___________</TEXT>
+       <LINE>003</LINE>
+       <COLUMN>033</COLUMN>
+       <LENGTH>011</LENGTH>
+       <VISLENGTH>011</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>INT4</FORMAT>
+       <OUTPUT_FLD>X</OUTPUT_FLD>
+       <REQU_ENTRY>N</REQU_ENTRY>
+       <RIGHT_JUST>X</RIGHT_JUST>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEXT</TYPE>
+       <NAME>T001-KTOPL</NAME>
+       <LINE>003</LINE>
+       <COLUMN>056</COLUMN>
        <LENGTH>015</LENGTH>
        <VISLENGTH>015</VISLENGTH>
        <HEIGHT>001</HEIGHT>
        <FORMAT>CHAR</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <MODIFIC>2</MODIFIC>
+       <FOREIGNKEY>X</FOREIGNKEY>
        <REQU_ENTRY>N</REQU_ENTRY>
        <LABELLEFT>X</LABELLEFT>
+       <DICT_I_FKY>X</DICT_I_FKY>
       </RPY_DYFATC>
       <RPY_DYFATC>
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEMPLATE</TYPE>
-       <NAME>GS_SUBLOGIN-ORGCD</NAME>
-       <TEXT>_______________</TEXT>
-       <LINE>004</LINE>
-       <COLUMN>019</COLUMN>
-       <LENGTH>015</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
+       <NAME>T001-KTOPL</NAME>
+       <LINE>003</LINE>
+       <COLUMN>072</COLUMN>
+       <LENGTH>004</LENGTH>
+       <VISLENGTH>004</VISLENGTH>
        <HEIGHT>001</HEIGHT>
        <FORMAT>CHAR</FORMAT>
+       <FROM_DICT>X</FROM_DICT>
+       <PARAM_ID>KPL</PARAM_ID>
+       <FOREIGNKEY>X</FOREIGNKEY>
        <OUTPUT_FLD>X</OUTPUT_FLD>
        <REQU_ENTRY>N</REQU_ENTRY>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>GS_SUBLOGIN-ORGNM</NAME>
-       <TEXT>______________________________</TEXT>
-       <LINE>004</LINE>
-       <COLUMN>035</COLUMN>
-       <LENGTH>030</LENGTH>
-       <VISLENGTH>030</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <REQU_ENTRY>N</REQU_ENTRY>
+       <DICT_I_FKY>X</DICT_I_FKY>
       </RPY_DYFATC>
       <RPY_DYFATC>
        <CONT_TYPE>SCREEN</CONT_TYPE>
@@ -273,7 +236,7 @@
        <NAME>%#AUTOTEXT003</NAME>
        <TEXT>BDC_Mode(A,E,N)</TEXT>
        <LINE>004</LINE>
-       <COLUMN>075</COLUMN>
+       <COLUMN>003</COLUMN>
        <LENGTH>015</LENGTH>
        <VISLENGTH>015</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -289,7 +252,7 @@
        <TEXT>_</TEXT>
        <DROPDOWN>K</DROPDOWN>
        <LINE>004</LINE>
-       <COLUMN>091</COLUMN>
+       <COLUMN>019</COLUMN>
        <LENGTH>001</LENGTH>
        <VISLENGTH>015</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -370,23 +333,9 @@
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>FRAME</TYPE>
        <NAME>%#AUTOTEXT001</NAME>
-       <TEXT>발의자정보________________________________________________________________</TEXT>
+       <TEXT>기본정보_________________________________________________________________</TEXT>
        <LINE>001</LINE>
        <COLUMN>001</COLUMN>
-       <LENGTH>070</LENGTH>
-       <VISLENGTH>070</VISLENGTH>
-       <HEIGHT>005</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <REQU_ENTRY>N</REQU_ENTRY>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>FRAME</TYPE>
-       <NAME>%#AUTOTEXT002</NAME>
-       <TEXT>기본_정보________________________________________________________________</TEXT>
-       <LINE>001</LINE>
-       <COLUMN>071</COLUMN>
        <LENGTH>070</LENGTH>
        <VISLENGTH>070</VISLENGTH>
        <HEIGHT>005</HEIGHT>
@@ -444,37 +393,6 @@
        <TYPE>TEXT</TYPE>
        <NAME>GV_UPD_CNT</NAME>
        <TEXT>처리대상_건수________</TEXT>
-       <LINE>002</LINE>
-       <COLUMN>075</COLUMN>
-       <LENGTH>015</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <REQU_ENTRY>N</REQU_ENTRY>
-       <LABELLEFT>X</LABELLEFT>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>GV_UPD_CNT</NAME>
-       <TEXT>___________</TEXT>
-       <LINE>002</LINE>
-       <COLUMN>091</COLUMN>
-       <LENGTH>011</LENGTH>
-       <VISLENGTH>011</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>INT4</FORMAT>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <REQU_ENTRY>N</REQU_ENTRY>
-       <RIGHT_JUST>X</RIGHT_JUST>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEXT</TYPE>
-       <NAME>GS_SUBLOGIN-EMPNO</NAME>
-       <TEXT>발의자사번__________</TEXT>
        <LINE>003</LINE>
        <COLUMN>003</COLUMN>
        <LENGTH>015</LENGTH>
@@ -488,31 +406,17 @@
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEMPLATE</TYPE>
-       <NAME>GS_SUBLOGIN-EMPNO</NAME>
-       <TEXT>_______________</TEXT>
+       <NAME>GV_UPD_CNT</NAME>
+       <TEXT>___________</TEXT>
        <LINE>003</LINE>
        <COLUMN>019</COLUMN>
-       <LENGTH>015</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
+       <LENGTH>011</LENGTH>
+       <VISLENGTH>011</VISLENGTH>
        <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
+       <FORMAT>INT4</FORMAT>
        <OUTPUT_FLD>X</OUTPUT_FLD>
        <REQU_ENTRY>N</REQU_ENTRY>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>GS_SUBLOGIN-EMPNM</NAME>
-       <TEXT>______________________________</TEXT>
-       <LINE>003</LINE>
-       <COLUMN>035</COLUMN>
-       <LENGTH>030</LENGTH>
-       <VISLENGTH>030</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <REQU_ENTRY>N</REQU_ENTRY>
+       <RIGHT_JUST>X</RIGHT_JUST>
       </RPY_DYFATC>
       <RPY_DYFATC>
        <CONT_TYPE>SCREEN</CONT_TYPE>
@@ -520,8 +424,8 @@
        <TYPE>TEXT</TYPE>
        <NAME>%#AUTOTEXT003</NAME>
        <TEXT>BDC_Mode(A,E,N)</TEXT>
-       <LINE>003</LINE>
-       <COLUMN>075</COLUMN>
+       <LINE>004</LINE>
+       <COLUMN>003</COLUMN>
        <LENGTH>015</LENGTH>
        <VISLENGTH>015</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -536,55 +440,10 @@
        <NAME>GV_MODE</NAME>
        <TEXT>_</TEXT>
        <DROPDOWN>K</DROPDOWN>
-       <LINE>003</LINE>
-       <COLUMN>091</COLUMN>
-       <LENGTH>001</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <REQU_ENTRY>N</REQU_ENTRY>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEXT</TYPE>
-       <NAME>GS_SUBLOGIN-ORGCD</NAME>
-       <TEXT>발의부서코드_________</TEXT>
-       <LINE>004</LINE>
-       <COLUMN>003</COLUMN>
-       <LENGTH>015</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <REQU_ENTRY>N</REQU_ENTRY>
-       <LABELLEFT>X</LABELLEFT>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>GS_SUBLOGIN-ORGCD</NAME>
-       <TEXT>_______________</TEXT>
        <LINE>004</LINE>
        <COLUMN>019</COLUMN>
-       <LENGTH>015</LENGTH>
+       <LENGTH>001</LENGTH>
        <VISLENGTH>015</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <REQU_ENTRY>N</REQU_ENTRY>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>GS_SUBLOGIN-ORGNM</NAME>
-       <TEXT>______________________________</TEXT>
-       <LINE>004</LINE>
-       <COLUMN>035</COLUMN>
-       <LENGTH>030</LENGTH>
-       <VISLENGTH>030</VISLENGTH>
        <HEIGHT>001</HEIGHT>
        <FORMAT>CHAR</FORMAT>
        <OUTPUT_FLD>X</OUTPUT_FLD>
@@ -802,20 +661,20 @@
       <OBJ_TYPE>A</OBJ_TYPE>
       <OBJ_CODE>000001</OBJ_CODE>
       <MODAL>D</MODAL>
-      <INT_NOTE>200번 화면 상태</INT_NOTE>
+      <INT_NOTE>100번 화면 상태</INT_NOTE>
      </RSMPE_ATRT>
      <RSMPE_ATRT>
       <OBJ_TYPE>P</OBJ_TYPE>
       <OBJ_CODE>000001</OBJ_CODE>
       <MODAL>D</MODAL>
-      <INT_NOTE>200번 화면 상태</INT_NOTE>
+      <INT_NOTE>100번 화면 상태</INT_NOTE>
      </RSMPE_ATRT>
      <RSMPE_ATRT>
       <OBJ_TYPE>B</OBJ_TYPE>
       <OBJ_CODE>000001</OBJ_CODE>
       <SUB_CODE>0001</SUB_CODE>
       <MODAL>D</MODAL>
-      <INT_NOTE>200번 화면 상태</INT_NOTE>
+      <INT_NOTE>100번 화면 상태</INT_NOTE>
      </RSMPE_ATRT>
      <RSMPE_ATRT>
       <OBJ_TYPE>P</OBJ_TYPE>
@@ -846,7 +705,7 @@
     <item>
      <ID>I</ID>
      <KEY>001</KEY>
-     <ENTRY>발의자정보</ENTRY>
+     <ENTRY>기본정보</ENTRY>
      <LENGTH>15</LENGTH>
     </item>
     <item>
@@ -1073,22 +932,8 @@
     </item>
     <item>
      <ID>R</ID>
-     <ENTRY>[FI] G/L 계정 업로드</ENTRY>
+     <ENTRY>[FI] G/L계정 업로드</ENTRY>
      <LENGTH>15</LENGTH>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_BEMPNO</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
-     <SPLIT>D</SPLIT>
-    </item>
-    <item>
-     <ID>S</ID>
-     <KEY>P_BORGCD</KEY>
-     <ENTRY>.</ENTRY>
-     <LENGTH>9</LENGTH>
-     <SPLIT>D</SPLIT>
     </item>
     <item>
      <ID>S</ID>

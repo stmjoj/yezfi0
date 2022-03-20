@@ -134,6 +134,7 @@ FORM CALL_SCREEN_0100 .
   YEZFIS0110-BUTXT     = P_BUTXT.
   YEZFIS0110-RLDNR     = P_RLDNR.
   YEZFIS0110-RLDNR_TXT = P_LDTXT.
+  YEZFIS0110-DTCNT     = LINES( GT_OUTTAB[] ).
 
   CALL SCREEN 0100.
 
@@ -246,12 +247,13 @@ FORM GET_GENERAL_LEDGER .
     FROM FAGLFLEXA AS A INNER JOIN BKPF AS B ON B~BUKRS = A~RBUKRS
                                             AND B~BELNR = A~BELNR
                                             AND B~GJAHR = A~GJAHR
-   WHERE A~RLDNR   =  @P_RLDNR
-     AND A~RBUKRS  =  @P_BUKRS
-     AND A~RACCT   IN @S_HKONT
-     AND A~GJAHR   IN @S_GJAHR
-     AND A~BUDAT   IN @S_BUDAT
-     AND A~BELNR   IN @S_BELNR
+   WHERE A~RLDNR    =  @P_RLDNR
+     AND A~RBUKRS   =  @P_BUKRS
+     AND A~RACCT    IN @S_HKONT
+     AND A~GJAHR    IN @S_GJAHR
+     AND A~BUDAT    IN @S_BUDAT
+     AND A~BELNR    IN @S_BELNR
+     AND B~XBLNR    IN @S_XBLNR
      AND B~XREF1_HD IN @S_XREF1H
      AND B~XREF2_HD IN @S_XREF2H
      AND A~RBUSA    IN @S_GSBER
@@ -534,12 +536,8 @@ FORM GET_TEXT_SKAT .
 
   DATA: LT_KEY   LIKE STANDARD TABLE OF LS_KEY.
 
-  DATA: LV_HKONT   TYPE HKONT.
-
   CLEAR: LT_KEY[].
   CLEAR: LS_KEY.
-
-  CLEAR: LV_HKONT.
 
 *----------------------------------------------------------------------*
 * For All Entries 를 위한 Itab 구성
@@ -582,21 +580,8 @@ FORM GET_TEXT_SKAT .
     IF ( SY-SUBRC = 0 ).
       GS_OUTTAB-HKONT_TXT = LS_SKAT-TXT50.
 
-      CALL FUNCTION 'CONVERSION_EXIT_ALPHA_OUTPUT'
-        EXPORTING
-          INPUT  = GS_OUTTAB-HKONT
-        IMPORTING
-          OUTPUT = LV_HKONT.
-
-      CONCATENATE LV_HKONT
-                  '/'
-                  GS_OUTTAB-HKONT_TXT
-             INTO GS_OUTTAB-HKONT_KEY
-        SEPARATED BY SPACE.
-
       MODIFY GT_OUTTAB FROM GS_OUTTAB INDEX LV_INDEX
-                       TRANSPORTING HKONT_TXT
-                                    HKONT_KEY.
+                       TRANSPORTING HKONT_TXT.
     ENDIF.
   ENDLOOP.
 

@@ -11,27 +11,44 @@ FORM INITIALIZATION .
 * Sublogin 에 대한 사용자 정보를 가져 온다.
   PERFORM CHECK_SUBLOGIN_PROC.
 
-  GET PARAMETER ID 'BUK'    FIELD P_BUKRS.
+  P_BUKRS  = GS_SUBLOGIN-BUKRS.
+  P_BUTXT  = GS_SUBLOGIN-BUTXT.
 
-  PERFORM SET_BUTXT.
+  PERFORM GET_COMPANY_INFO.           " 회사코드 정보 설정
 
 ENDFORM.
 
 *&---------------------------------------------------------------------*
-*&      Form  SET_BUTXT
+*&      Form  GET_COMPANY_INFO
 *&---------------------------------------------------------------------*
-*       회사코드 명 설정
+*       회사코드 정보 설정
 *----------------------------------------------------------------------*
-FORM SET_BUTXT .
+FORM GET_COMPANY_INFO .
 
-  CLEAR: P_BUTXT.
+*----------------------------------------------------------------------*
+* 지역변수 선언 및 초기화
+*----------------------------------------------------------------------*
+  DATA: LV_RETURN   TYPE BAPI_MTYPE.
+  DATA: LV_MESSAGE  TYPE BAPI_MSG.
 
-  CHECK ( P_BUKRS IS NOT INITIAL ).
+  CLEAR: LV_RETURN.
+  CLEAR: LV_MESSAGE.
 
-  SELECT SINGLE BUTXT
-    FROM T001
-   WHERE BUKRS = @P_BUKRS
-    INTO @P_BUTXT.
+*----------------------------------------------------------------------*
+* 회사코드 정보 가져오기
+*----------------------------------------------------------------------*
+  CALL FUNCTION 'Y_EZFI_GET_BUKRS_INFO'
+    EXPORTING
+      IV_BUKRS   = P_BUKRS
+    IMPORTING
+      EV_RETURN  = LV_RETURN
+      EV_MESSAGE = LV_MESSAGE
+      ES_BUKRS   = GS_BUKRS.
+
+  IF ( LV_RETURN <> 'S' ).
+    MESSAGE I000(YEZFIM) WITH LV_MESSAGE DISPLAY LIKE 'E'.
+    LEAVE LIST-PROCESSING.
+  ENDIF.
 
 ENDFORM.
 
@@ -180,41 +197,6 @@ FORM DISPLAY_OUTTAB .
   ENDIF.
 
   CALL SCREEN 100.
-
-ENDFORM.
-
-*&---------------------------------------------------------------------*
-*&      Form  GET_COMPANY_INFO
-*&---------------------------------------------------------------------*
-*       회사코드 정보 설정
-*----------------------------------------------------------------------*
-FORM GET_COMPANY_INFO .
-
-*----------------------------------------------------------------------*
-* 지역변수 선언 및 초기화
-*----------------------------------------------------------------------*
-  DATA: LV_RETURN   TYPE BAPI_MTYPE.
-  DATA: LV_MESSAGE  TYPE BAPI_MSG.
-
-  CLEAR: LV_RETURN.
-  CLEAR: LV_MESSAGE.
-
-*----------------------------------------------------------------------*
-* 지역변수 선언 및 초기화
-*----------------------------------------------------------------------*
-
-  CALL FUNCTION 'Y_EZFI_GET_BUKRS_INFO'
-    EXPORTING
-      IV_BUKRS   = P_BUKRS
-    IMPORTING
-      EV_RETURN  = LV_RETURN
-      EV_MESSAGE = LV_MESSAGE
-      ES_BUKRS   = GS_BUKRS.
-
-  IF ( LV_RETURN <> 'S' ).
-    MESSAGE I000(YEZFIM) WITH LV_MESSAGE DISPLAY LIKE 'E'.
-    LEAVE LIST-PROCESSING.
-  ENDIF.
 
 ENDFORM.
 
