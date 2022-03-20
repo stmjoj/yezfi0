@@ -3,7 +3,7 @@
  <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
   <asx:values>
    <PROGDIR>
-    <NAME>YEZFIR0030</NAME>
+    <NAME>YEZFIR0100</NAME>
     <SUBC>1</SUBC>
     <RLOAD>3</RLOAD>
     <FIXPT>X</FIXPT>
@@ -12,7 +12,7 @@
    <DYNPROS>
     <item>
      <HEADER>
-      <PROGRAM>YEZFIR0030</PROGRAM>
+      <PROGRAM>YEZFIR0100</PROGRAM>
       <SCREEN>0100</SCREEN>
       <LANGUAGE>3</LANGUAGE>
       <DESCRIPT>100번 화면</DESCRIPT>
@@ -46,11 +46,11 @@
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>FRAME</TYPE>
        <NAME>%#AUTOTEXT001</NAME>
-       <TEXT>기본정보___________________________________________________________________________</TEXT>
+       <TEXT>기본정보________________________________________________________________________________________________</TEXT>
        <LINE>001</LINE>
        <COLUMN>001</COLUMN>
-       <LENGTH>080</LENGTH>
-       <VISLENGTH>080</VISLENGTH>
+       <LENGTH>101</LENGTH>
+       <VISLENGTH>101</VISLENGTH>
        <HEIGHT>005</HEIGHT>
        <FORMAT>CHAR</FORMAT>
        <REQU_ENTRY>N</REQU_ENTRY>
@@ -104,9 +104,54 @@
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEXT</TYPE>
+       <NAME>GS_BUKRS-KOKRS</NAME>
+       <TEXT>관리회계_영역________</TEXT>
+       <LINE>003</LINE>
+       <COLUMN>003</COLUMN>
+       <LENGTH>015</LENGTH>
+       <VISLENGTH>015</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <REQU_ENTRY>N</REQU_ENTRY>
+       <LABELLEFT>X</LABELLEFT>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEMPLATE</TYPE>
+       <NAME>GS_BUKRS-KOKRS</NAME>
+       <TEXT>____</TEXT>
+       <LINE>003</LINE>
+       <COLUMN>019</COLUMN>
+       <LENGTH>004</LENGTH>
+       <VISLENGTH>004</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <OUTPUT_FLD>X</OUTPUT_FLD>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEMPLATE</TYPE>
+       <NAME>GV_BEZEI</NAME>
+       <TEXT>_________________________</TEXT>
+       <LINE>003</LINE>
+       <COLUMN>024</COLUMN>
+       <LENGTH>025</LENGTH>
+       <VISLENGTH>025</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <OUTPUT_FLD>X</OUTPUT_FLD>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEXT</TYPE>
        <NAME>GV_UPD_CNT</NAME>
        <TEXT>처리대상_건수________</TEXT>
-       <LINE>003</LINE>
+       <LINE>004</LINE>
        <COLUMN>003</COLUMN>
        <LENGTH>015</LENGTH>
        <VISLENGTH>015</VISLENGTH>
@@ -121,7 +166,7 @@
        <TYPE>TEMPLATE</TYPE>
        <NAME>GV_UPD_CNT</NAME>
        <TEXT>___________</TEXT>
-       <LINE>003</LINE>
+       <LINE>004</LINE>
        <COLUMN>019</COLUMN>
        <LENGTH>011</LENGTH>
        <VISLENGTH>011</VISLENGTH>
@@ -137,7 +182,7 @@
        <TYPE>TEXT</TYPE>
        <NAME>%#AUTOTEXT004</NAME>
        <TEXT>/</TEXT>
-       <LINE>003</LINE>
+       <LINE>004</LINE>
        <COLUMN>031</COLUMN>
        <LENGTH>001</LENGTH>
        <VISLENGTH>001</VISLENGTH>
@@ -151,7 +196,7 @@
        <TYPE>TEMPLATE</TYPE>
        <NAME>GV_TOT_CNT</NAME>
        <TEXT>___________</TEXT>
-       <LINE>003</LINE>
+       <LINE>004</LINE>
        <COLUMN>033</COLUMN>
        <LENGTH>011</LENGTH>
        <VISLENGTH>011</VISLENGTH>
@@ -168,7 +213,7 @@
        <NAME>%#AUTOTEXT003</NAME>
        <TEXT>BDC_Mode(A,E,N)</TEXT>
        <LINE>004</LINE>
-       <COLUMN>003</COLUMN>
+       <COLUMN>054</COLUMN>
        <LENGTH>015</LENGTH>
        <VISLENGTH>015</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -184,7 +229,7 @@
        <TEXT>_</TEXT>
        <DROPDOWN>K</DROPDOWN>
        <LINE>004</LINE>
-       <COLUMN>019</COLUMN>
+       <COLUMN>070</COLUMN>
        <LENGTH>001</LENGTH>
        <VISLENGTH>015</VISLENGTH>
        <HEIGHT>001</HEIGHT>
@@ -231,7 +276,7 @@
     </item>
     <item>
      <HEADER>
-      <PROGRAM>YEZFIR0030</PROGRAM>
+      <PROGRAM>YEZFIR0100</PROGRAM>
       <SCREEN>0200</SCREEN>
       <LANGUAGE>3</LANGUAGE>
       <DESCRIPT>200번 화면</DESCRIPT>
@@ -323,9 +368,54 @@
        <CONT_TYPE>SCREEN</CONT_TYPE>
        <CONT_NAME>SCREEN</CONT_NAME>
        <TYPE>TEXT</TYPE>
+       <NAME>GS_BUKRS-KOKRS</NAME>
+       <TEXT>관리회계_영역________</TEXT>
+       <LINE>003</LINE>
+       <COLUMN>003</COLUMN>
+       <LENGTH>015</LENGTH>
+       <VISLENGTH>015</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <REQU_ENTRY>N</REQU_ENTRY>
+       <LABELLEFT>X</LABELLEFT>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEMPLATE</TYPE>
+       <NAME>GS_BUKRS-KOKRS</NAME>
+       <TEXT>____</TEXT>
+       <LINE>003</LINE>
+       <COLUMN>019</COLUMN>
+       <LENGTH>004</LENGTH>
+       <VISLENGTH>004</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <OUTPUT_FLD>X</OUTPUT_FLD>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEMPLATE</TYPE>
+       <NAME>GV_BEZEI</NAME>
+       <TEXT>_________________________</TEXT>
+       <LINE>003</LINE>
+       <COLUMN>024</COLUMN>
+       <LENGTH>025</LENGTH>
+       <VISLENGTH>025</VISLENGTH>
+       <HEIGHT>001</HEIGHT>
+       <FORMAT>CHAR</FORMAT>
+       <OUTPUT_FLD>X</OUTPUT_FLD>
+       <REQU_ENTRY>N</REQU_ENTRY>
+      </RPY_DYFATC>
+      <RPY_DYFATC>
+       <CONT_TYPE>SCREEN</CONT_TYPE>
+       <CONT_NAME>SCREEN</CONT_NAME>
+       <TYPE>TEXT</TYPE>
        <NAME>GV_UPD_CNT</NAME>
        <TEXT>처리대상_건수________</TEXT>
-       <LINE>003</LINE>
+       <LINE>004</LINE>
        <COLUMN>003</COLUMN>
        <LENGTH>015</LENGTH>
        <VISLENGTH>015</VISLENGTH>
@@ -340,7 +430,7 @@
        <TYPE>TEMPLATE</TYPE>
        <NAME>GV_UPD_CNT</NAME>
        <TEXT>___________</TEXT>
-       <LINE>003</LINE>
+       <LINE>004</LINE>
        <COLUMN>019</COLUMN>
        <LENGTH>011</LENGTH>
        <VISLENGTH>011</VISLENGTH>
@@ -349,37 +439,6 @@
        <OUTPUT_FLD>X</OUTPUT_FLD>
        <REQU_ENTRY>N</REQU_ENTRY>
        <RIGHT_JUST>X</RIGHT_JUST>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEXT</TYPE>
-       <NAME>%#AUTOTEXT003</NAME>
-       <TEXT>BDC_Mode(A,E,N)</TEXT>
-       <LINE>004</LINE>
-       <COLUMN>003</COLUMN>
-       <LENGTH>015</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <REQU_ENTRY>N</REQU_ENTRY>
-       <LABELLEFT>X</LABELLEFT>
-      </RPY_DYFATC>
-      <RPY_DYFATC>
-       <CONT_TYPE>SCREEN</CONT_TYPE>
-       <CONT_NAME>SCREEN</CONT_NAME>
-       <TYPE>TEMPLATE</TYPE>
-       <NAME>GV_MODE</NAME>
-       <TEXT>_</TEXT>
-       <DROPDOWN>K</DROPDOWN>
-       <LINE>004</LINE>
-       <COLUMN>019</COLUMN>
-       <LENGTH>001</LENGTH>
-       <VISLENGTH>015</VISLENGTH>
-       <HEIGHT>001</HEIGHT>
-       <FORMAT>CHAR</FORMAT>
-       <OUTPUT_FLD>X</OUTPUT_FLD>
-       <REQU_ENTRY>N</REQU_ENTRY>
       </RPY_DYFATC>
       <RPY_DYFATC>
        <CONT_TYPE>SCREEN</CONT_TYPE>
@@ -679,7 +738,7 @@
     <item>
      <ID>I</ID>
      <KEY>008</KEY>
-     <ENTRY>G/L 계정 업로드를 취소합니다. 계속하시겠습니까?</ENTRY>
+     <ENTRY>코스트센터 업로드를 취소합니다. 계속하시겠습니까?</ENTRY>
      <LENGTH>30</LENGTH>
     </item>
     <item>
@@ -709,7 +768,7 @@
     <item>
      <ID>I</ID>
      <KEY>013</KEY>
-     <ENTRY>G/L계정을 생성/변경합니다. 계속하시겠습니까?</ENTRY>
+     <ENTRY>코스트센터를 생성/변경합니다. 계속하시겠습니까?</ENTRY>
      <LENGTH>52</LENGTH>
     </item>
     <item>
@@ -737,135 +796,9 @@
      <LENGTH>14</LENGTH>
     </item>
     <item>
-     <ID>I</ID>
-     <KEY>T02</KEY>
-     <ENTRY>G/L 계정</ENTRY>
-     <LENGTH>16</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T03</KEY>
-     <ENTRY>내역</ENTRY>
-     <LENGTH>12</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T04</KEY>
-     <ENTRY>G/L 계정 설명</ENTRY>
-     <LENGTH>19</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T05</KEY>
-     <ENTRY>대차대조표 계정</ENTRY>
-     <LENGTH>18</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T06</KEY>
-     <ENTRY>손익계산서 계정 유형</ENTRY>
-     <LENGTH>21</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T07</KEY>
-     <ENTRY>계정 그룹</ENTRY>
-     <LENGTH>15</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T08</KEY>
-     <ENTRY>계정 통화</ENTRY>
-     <LENGTH>15</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T09</KEY>
-     <ENTRY>잔액(현지 통화)만</ENTRY>
-     <LENGTH>20</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T10</KEY>
-     <ENTRY>세금 범주</ENTRY>
-     <LENGTH>15</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T11</KEY>
-     <ENTRY>세금 없이 전기 허용</ENTRY>
-     <LENGTH>21</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T12</KEY>
-     <ENTRY>계정 유형에 대한 조정 계정</ENTRY>
-     <LENGTH>25</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T13</KEY>
-     <ENTRY>대체 계정 번호</ENTRY>
-     <LENGTH>18</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T14</KEY>
-     <ENTRY>외부 시스템에서 관리되는 계정</ENTRY>
-     <LENGTH>26</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T15</KEY>
-     <ENTRY>미결 항목 관리</ENTRY>
-     <LENGTH>18</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T16</KEY>
-     <ENTRY>개별 항목 조회</ENTRY>
-     <LENGTH>18</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T17</KEY>
-     <ENTRY>정렬 키</ENTRY>
-     <LENGTH>14</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T18</KEY>
-     <ENTRY>필드상태그룹</ENTRY>
-     <LENGTH>16</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T19</KEY>
-     <ENTRY>자동 전기만</ENTRY>
-     <LENGTH>16</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T20</KEY>
-     <ENTRY>조정 계정 입력 가능</ENTRY>
-     <LENGTH>21</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T21</KEY>
-     <ENTRY>처리유형</ENTRY>
-     <LENGTH>14</LENGTH>
-    </item>
-    <item>
-     <ID>I</ID>
-     <KEY>T22</KEY>
-     <ENTRY>상태</ENTRY>
-     <LENGTH>12</LENGTH>
-    </item>
-    <item>
      <ID>R</ID>
-     <ENTRY>[FI] G/L계정 업로드</ENTRY>
-     <LENGTH>15</LENGTH>
+     <ENTRY>[FI] 코스트센터 업로드</ENTRY>
+     <LENGTH>14</LENGTH>
     </item>
     <item>
      <ID>S</ID>

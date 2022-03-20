@@ -1,5 +1,5 @@
 *&---------------------------------------------------------------------*
-*&  Include           YEZFIR0090_F01
+*&  Include           YEZFII0100_F01
 *&---------------------------------------------------------------------*
 *&---------------------------------------------------------------------*
 *&      Form  INITIALIZATION
@@ -86,10 +86,23 @@ FORM INIT_PROC .
   CLEAR: GT_RESULT[].
   CLEAR: GS_RESULT.
 
-  CLEAR: GT_CEPC[].
-  CLEAR: GS_CEPC.
+  CLEAR: GT_CSKS[].
+  CLEAR: GS_CSKS.
+
+  CLEAR: GT_BDCTAB[].
+  CLEAR: GS_BDCTAB.
+
+  CLEAR: GT_BDCMSG[].
+  CLEAR: GS_BDCMSG.
+
+  CLEAR: GV_MSGTYP.
+  CLEAR: GV_MSGTXT.
+
+  CLEAR: GS_PARAMS.
+  CLEAR: GV_MODE.
 
   GV_TITLE = SY-TITLE.
+  GV_MODE  = 'N'.              " BDC MODE : DEFAULT 'M'
 
 *----------------------------------------------------------------------*
 * ALV 변수 초기화
@@ -121,7 +134,7 @@ FORM INIT_PROC .
 *----------------------------------------------------------------------*
   PERFORM GET_COMPANY_INFO.           " 회사코드 정보 설정
 
-  PERFORM GET_PRCTR_LIST.             " 기존 손익센터 목록
+  PERFORM GET_COSTCENTER_LIST.        " 기존 코스트센터 목록
 
 ENDFORM.
 
@@ -364,7 +377,7 @@ FORM EXIT_SCREEN_0100 .
   CALL FUNCTION 'POPUP_TO_CONFIRM'
     EXPORTING
       TITLEBAR       = TEXT-005     " 경고
-      TEXT_QUESTION  = TEXT-008     " 손익센터 업로드를 취소합니다. 계속하시겠습니까?
+      TEXT_QUESTION  = TEXT-008     " 코스트센터 업로드를 취소합니다. 계속하시겠습니까?
       TEXT_BUTTON_1  = TEXT-006     " 예
       TEXT_BUTTON_2  = TEXT-007     " 아니오
       DEFAULT_BUTTON = '2'
@@ -409,7 +422,7 @@ FORM SAVE_DATA_0100 .
   CALL FUNCTION 'POPUP_TO_CONFIRM'
     EXPORTING
       TITLEBAR      = TEXT-010         " 알림
-      TEXT_QUESTION = TEXT-013         " 손익센터를 생성/변경합니다. 계속하시겠습니까?
+      TEXT_QUESTION = TEXT-013         " 코스트센터를 생성/변경합니다. 계속하시겠습니까?
       TEXT_BUTTON_1 = TEXT-011         " 예
       TEXT_BUTTON_2 = TEXT-012         " 아니오
     IMPORTING
@@ -422,21 +435,27 @@ FORM SAVE_DATA_0100 .
   ENDIF.
 
 *----------------------------------------------------------------------*
-* BAPI 를 이용한 손익센터 생성/변경
+* BDC 를 통한 코스트센터 생성/변경
 *----------------------------------------------------------------------*
   LOOP AT GT_OUTTAB INTO GS_OUTTAB WHERE STATU = ICON_CREATE
                                       OR STATU = ICON_CHANGE.
+    CLEAR: GT_BDCTAB[].
+    CLEAR: GS_BDCTAB.
+
+    CLEAR: GT_BDCMSG[].
+    CLEAR: GS_BDCMSG.
+
+    CLEAR: GV_MSGTXT.
+
 
     CASE GS_OUTTAB-STATU.
       WHEN ICON_CREATE.             " 신규
-        PERFORM PROFIT_CENTER_CREATE.
+        PERFORM COST_CENTER_CREATE.
       WHEN ICON_CHANGE.             " 변경
-        PERFORM PROFIT_CENTER_CHANGE.
+        PERFORM COST_CENTER_CHANGE.
     ENDCASE.
 
-*   처리 후 표준계층구조 Lock 으로 에러발생하여 1초 Wait
-*   에러 메시지 : "Hierarchy is Locked and therefore cannot be chnaged at present"
-    WAIT UP TO 1 SECONDS.
+    PERFORM MAKE_RESULT.
   ENDLOOP.
 
 *----------------------------------------------------------------------*
@@ -484,7 +503,6 @@ ENDFORM.
 *&---------------------------------------------------------------------*
 *       업로드 데이터 화면 출력
 *----------------------------------------------------------------------*
-*----------------------------------------------------------------------*
 FORM DISPLAY_DATA .
 
   IF ( GT_OUTTAB[] IS NOT INITIAL ).
@@ -506,27 +524,30 @@ FORM DISPLAY_DATA .
 ENDFORM.
 
 *&---------------------------------------------------------------------*
-*&      Form  GET_PRCTR_LIST
+*&      Form  GET_COSTCENTER_LIST
 *&---------------------------------------------------------------------*
-*       기존 손익센터 목록
+*       기존 코스트센터 목록
 *----------------------------------------------------------------------*
-FORM GET_PRCTR_LIST .
+FORM GET_COSTCENTER_LIST .
 
-  SELECT A~PRCTR   AS PRCTR
+  SELECT A~KOSTL   AS KOSTL
        , A~DATBI   AS DATBI
        , A~DATAB   AS DATAB
        , A~VERAK   AS VERAK
+       , A~KOSAR   AS KOSAR
        , A~KHINR   AS KHINR
+       , A~WAERS   AS WAERS
+       , A~PRCTR   AS PRCTR
        , B~KTEXT   AS KTEXT
        , B~LTEXT   AS LTEXT
-    FROM CEPC  AS A LEFT OUTER JOIN
-         CEPCT AS B
+    FROM CSKS  AS A LEFT OUTER JOIN
+         CSKT  AS B
       ON B~SPRAS = @SY-LANGU
-     AND B~PRCTR = A~PRCTR
-     AND B~DATBI = A~DATBI
      AND B~KOKRS = A~KOKRS
+     AND B~KOSTL = A~KOSTL
+     AND B~DATBI = A~DATBI
    WHERE A~KOKRS = @GS_BUKRS-KOKRS
-    INTO CORRESPONDING FIELDS OF TABLE @GT_CEPC.
+    INTO CORRESPONDING FIELDS OF TABLE @GT_CSKS.
 
 ENDFORM.
 
@@ -537,9 +558,15 @@ ENDFORM.
 *----------------------------------------------------------------------*
 FORM MAKE_OUTTAB_PROC .
 
-  SORT GT_CEPC BY PRCTR.
+  SORT GT_CSKS BY KOSTL.
 
   LOOP AT GT_UPLOAD INTO GS_UPLOAD.
+    CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
+      EXPORTING
+        INPUT  = GS_UPLOAD-KOSTL
+      IMPORTING
+        OUTPUT = GS_UPLOAD-KOSTL.
+
     CALL FUNCTION 'CONVERSION_EXIT_ALPHA_INPUT'
       EXPORTING
         INPUT  = GS_UPLOAD-PRCTR
@@ -549,14 +576,14 @@ FORM MAKE_OUTTAB_PROC .
     MOVE-CORRESPONDING GS_UPLOAD TO GS_OUTTAB.
 
 *   처리유형 구분
-    IF ( GS_OUTTAB-PRCTR IS NOT INITIAL ).
-      READ TABLE GT_CEPC INTO GS_CEPC
-                         WITH KEY PRCTR = GS_OUTTAB-PRCTR
+    IF ( GS_OUTTAB-KOSTL IS NOT INITIAL ).
+      READ TABLE GT_CSKS INTO GS_CSKS
+                         WITH KEY KOSTL = GS_OUTTAB-KOSTL
                          BINARY SEARCH
                          TRANSPORTING ALL FIELDS.
 
       IF ( SY-SUBRC = 0 ).
-        IF ( GS_UPLOAD = GS_CEPC ).
+        IF ( GS_UPLOAD = GS_CSKS ).
           GS_OUTTAB-STATU = ICON_EQUAL.
           GS_OUTTAB-PRTYP = TEXT-017.      " 변경없음
         ELSE.
@@ -576,171 +603,181 @@ FORM MAKE_OUTTAB_PROC .
 ENDFORM.
 
 *&---------------------------------------------------------------------*
-*&      Form  PROFIT_CENTER_CREATE
+*&      Form  COST_CENTER_CREATE
 *&---------------------------------------------------------------------*
-*       손익센터 생성
+*       코스트센터 생성
 *----------------------------------------------------------------------*
-FORM PROFIT_CENTER_CREATE.
+FORM COST_CENTER_CREATE.
 
-*----------------------------------------------------------------------*
-* 지역변수 선언 및 초기화
-*----------------------------------------------------------------------*
-  DATA: LS_RETURN           TYPE BAPIRET2.
+  DATA: LV_COUNT   TYPE I.
 
-  DATA: LS_PROFITCENTERID   TYPE BAPI0015ID2.
-  DATA: LS_BASICDATA        TYPE BAPI0015_4.
-  DATA: LS_ADDRESS          TYPE BAPI0015_5.
+  CLEAR: LV_COUNT.
 
-  DATA: LV_VALIDFROM        TYPE SYDATUM.
-  DATA: LV_VALIDTO          TYPE SYDATUM.
-  DATA: LV_PHINR            TYPE KHINR.
-  DATA: LV_MSGTXT           TYPE ZZIFTEXT.
+* 초기화면
+  PERFORM BDC_DYNPRO_PROC USING: 'X' 'SAPLKMA1'         '0200',
+                                 ' ' 'BDC_OKCODE'       '/00',
+                                 ' ' 'CSKSZ-KOKRS'      GS_BUKRS-KOKRS,    " 관리회계 영역
+                                 ' ' 'CSKSZ-KOSTL'      GS_OUTTAB-KOSTL,   " 코스트 센터
+                                 ' ' 'CSKSZ-DATAB_ANFO' GS_OUTTAB-DATAB,   " 효력 시작일
+                                 ' ' 'CSKSZ-DATBI_ANFO' GS_OUTTAB-DATBI.   " 효력 종료일
 
-  CLEAR: LS_RETURN.
 
-  CLEAR: LS_PROFITCENTERID.
-  CLEAR: LS_BASICDATA.
-  CLEAR: LS_ADDRESS.
+* 기본화면
+  PERFORM BDC_DYNPRO_PROC USING: 'X' 'SAPLKMA1'         '0299',
+                                 ' ' 'BDC_OKCODE'       '=BU',
+                                 ' ' 'CSKSZ-KTEXT'      GS_OUTTAB-KTEXT,   " 일반이름
+                                 ' ' 'CSKSZ-LTEXT'      GS_OUTTAB-LTEXT,   " 내역
+                                 ' ' 'CSKSZ-VERAK'      GS_OUTTAB-VERAK,   " 손익 센터 책임자
+                                 ' ' 'CSKSZ-KOSAR'      GS_OUTTAB-KOSAR,   " 코스트 센터 범주
+                                 ' ' 'CSKSZ-KHINR'      GS_OUTTAB-KHINR,   " 표준계층구조영역
+                                 ' ' 'CSKSZ-WAERS'      GS_OUTTAB-WAERS,   " 통화 키
+                                 ' ' 'CSKSZ-PRCTR'      GS_OUTTAB-PRCTR.   " 손익 센터
 
-  CLEAR: LV_VALIDFROM.
-  CLEAR: LV_VALIDTO.
-  CLEAR: LV_PHINR.
-  CLEAR: LV_MSGTXT.
+* Call Transaction
+  GS_PARAMS-DISMODE  = GV_MODE.
+  GS_PARAMS-RACOMMIT = 'X'.
+  GS_PARAMS-UPDMODE  = 'S'.
 
-*----------------------------------------------------------------------*
-* 손익센터 정보 구성
-*----------------------------------------------------------------------*
-  LS_PROFITCENTERID-CO_AREA    = GS_BUKRS-KOKRS.            " 관리회계 영역
-  LS_PROFITCENTERID-PROFIT_CTR = GS_OUTTAB-PRCTR.           " 손익 센터
+  CALL TRANSACTION  'KS01'     USING          GT_BDCTAB
+                               OPTIONS  FROM  GS_PARAMS
+                               MESSAGES INTO  GT_BDCMSG.
 
-  LS_BASICDATA-PRCTR_NAME      = GS_OUTTAB-KTEXT.           " 일반이름
-  LS_BASICDATA-LONG_TEXT       = GS_OUTTAB-LTEXT.           " 설명
-  LS_BASICDATA-IN_CHARGE       = GS_OUTTAB-VERAK.           " 손익센터 책임자
-  LS_BASICDATA-PRCTR_HIER_GRP  = GS_OUTTAB-KHINR.           " 손익센터영역
+* 처리결과 점검
+  READ TABLE GT_BDCMSG INTO GS_BDCMSG
+                       WITH KEY MSGTYP = 'S'
+                                MSGID  = 'KS'
+                                MSGNR  = '005'.   " 코스트센터가 생성됐습니다
 
-  LV_VALIDFROM  = GS_OUTTAB-DATAB.                          " Valid-from date
-  LV_VALIDTO    = GS_OUTTAB-DATBI.                          " Valid-to date
+  IF ( SY-SUBRC = 0 ).                  " 성공
+    GV_MSGTYP = 'S'.
+  ELSE.                                 " 실패
+    GV_MSGTYP = 'E'.
 
-*----------------------------------------------------------------------*
-*  손익센터 생성
-*----------------------------------------------------------------------*
-  CALL FUNCTION 'BAPI_PROFITCENTER_CREATE'
-    EXPORTING
-      PROFITCENTERID = LS_PROFITCENTERID
-      VALIDFROM      = LV_VALIDFROM
-      VALIDTO        = LV_VALIDTO
-      BASICDATA      = LS_BASICDATA
-      ADDRESS        = LS_ADDRESS
-      TESTRUN        = ' '
-    IMPORTING
-      RETURN         = LS_RETURN.
-
-*----------------------------------------------------------------------*
-*  결과 처리
-*----------------------------------------------------------------------*
-  MOVE-CORRESPONDING GS_OUTTAB TO GS_RESULT.
-
-  GS_RESULT-NATXT = LS_RETURN-MESSAGE.
-
-* 오류
-  IF ( LS_RETURN-TYPE = 'E' ).
-    CALL FUNCTION 'BAPI_TRANSACTION_ROLLBACK'.
-
-    GS_RESULT-STATU = ICON_LED_RED.
-* 정상
-  ELSE.
-    CALL FUNCTION 'BAPI_TRANSACTION_COMMIT'.
-
-    GS_RESULT-STATU = ICON_LED_GREEN.
+    LV_COUNT = LINES( GT_BDCMSG[] ).
+    READ TABLE GT_BDCMSG INTO GS_BDCMSG
+                         INDEX LV_COUNT.
   ENDIF.
-
-  APPEND GS_RESULT TO GT_RESULT.
-  CLEAR: GS_RESULT.
 
 ENDFORM.
 
 *&---------------------------------------------------------------------*
-*&      Form  PROFIT_CENTER_CHANGE
+*&      Form  COST_CENTER_CHANGE
 *&---------------------------------------------------------------------*
-*       손익센터 변경
+*       코스트센터 변경
 *----------------------------------------------------------------------*
-FORM PROFIT_CENTER_CHANGE .
+FORM COST_CENTER_CHANGE .
 
+  DATA: LV_COUNT   TYPE I.
+
+  CLEAR: LV_COUNT.
+
+* 초기화면
+  PERFORM BDC_DYNPRO_PROC USING: 'X' 'SAPLKMA1'         '0200',
+                                 ' ' 'BDC_OKCODE'       '/00',
+                                 ' ' 'CSKSZ-KOKRS'      GS_BUKRS-KOKRS,    " 관리회계 영역
+                                 ' ' 'CSKSZ-KOSTL'      GS_OUTTAB-KOSTL.   " 코스트 센터
+*                                 ' ' 'CSKSZ-DATAB_ANFO' GS_OUTTAB-DATAB,   " 효력 시작일
+*                                 ' ' 'CSKSZ-DATBI_ANFO' GS_OUTTAB-DATBI,   " 효력 종료일
+
+
+* 기본화면
+  PERFORM BDC_DYNPRO_PROC USING: 'X' 'SAPLKMA1'         '0299',
+                                 ' ' 'BDC_OKCODE'       '=BU',
+                                 ' ' 'CSKSZ-KTEXT'      GS_OUTTAB-KTEXT,   " 일반이름
+                                 ' ' 'CSKSZ-LTEXT'      GS_OUTTAB-LTEXT,   " 내역
+                                 ' ' 'CSKSZ-VERAK'      GS_OUTTAB-VERAK,   " 손익 센터 책임자
+                                 ' ' 'CSKSZ-KOSAR'      GS_OUTTAB-KOSAR,   " 코스트 센터 범주
+                                 ' ' 'CSKSZ-KHINR'      GS_OUTTAB-KHINR,   " 표준계층구조영역
+                                 ' ' 'CSKSZ-WAERS'      GS_OUTTAB-WAERS,   " 통화 키
+                                 ' ' 'CSKSZ-PRCTR'      GS_OUTTAB-PRCTR.   " 손익 센터
+
+* Call Transaction
+  GS_PARAMS-DISMODE  = GV_MODE.
+  GS_PARAMS-RACOMMIT = 'X'.
+  GS_PARAMS-UPDMODE  = 'S'.
+
+  CALL TRANSACTION  'KS02'     USING          GT_BDCTAB
+                               OPTIONS  FROM  GS_PARAMS
+                               MESSAGES INTO  GT_BDCMSG.
+* 처리결과 점검
+  READ TABLE GT_BDCMSG INTO GS_BDCMSG
+                       WITH KEY MSGTYP = 'S'
+                                MSGID  = 'KS'
+                                MSGNR  = '006'.   " 코스트센터가 변경됐습니다
+
+  IF ( SY-SUBRC = 0 ).                  " 성공
+    GV_MSGTYP = 'S'.
+  ELSE.                                 " 실패
+    GV_MSGTYP = 'E'.
+
+    LV_COUNT = LINES( GT_BDCMSG[] ).
+    READ TABLE GT_BDCMSG INTO GS_BDCMSG
+                         INDEX LV_COUNT.
+  ENDIF.
+
+ENDFORM.
+
+*&---------------------------------------------------------------------*
+*&      Form  BDC_DYNPRO_PROC
+*&---------------------------------------------------------------------*
+*       화면값입력                                                     *
 *----------------------------------------------------------------------*
-* 지역변수 선언 및 초기화
+*      -->PV_DYNBEGIN   BDC Dynpro 시작
+*      -->PV_FNAM       BDC 모듈 풀 또는 필드이름
+*      -->PV_FVAL       BDC Dynpro 번호 또는 BDC 필드값
 *----------------------------------------------------------------------*
-  DATA: LS_RETURN         TYPE BAPIRET2.
+FORM BDC_DYNPRO_PROC USING  PV_DYNBEGIN
+                            PV_FNAM
+                            PV_FVAL.
 
-  DATA: LS_BASICDATA      TYPE BAPI0015_4.
-  DATA: LS_BASICDATAX     TYPE BAPI0015_4X.
-  DATA: LS_ADDRESS        TYPE BAPI0015_5.
-  DATA: LS_ADDRESSX       TYPE BAPI0015_5X.
+  DATA: LS_BDCTAB   TYPE BDCDATA.
 
-  DATA: LV_VALIDFROM      TYPE SYDATUM.
-  DATA: LV_VALIDTO        TYPE SYDATUM.
+  CLEAR LS_BDCTAB.
 
-  CLEAR: LS_RETURN.
+  IF ( PV_DYNBEGIN = 'X' ).
+    LS_BDCTAB-DYNBEGIN = PV_DYNBEGIN.     " BDC Dynpro 시작
+    LS_BDCTAB-PROGRAM  = PV_FNAM.         " BDC 모듈 풀
+    LS_BDCTAB-DYNPRO   = PV_FVAL.         " BDC Dynpro 번호
 
-  CLEAR: LS_BASICDATA.
-  CLEAR: LS_BASICDATAX.
-  CLEAR: LS_ADDRESS.
-  CLEAR: LS_ADDRESSX.
+    APPEND LS_BDCTAB TO GT_BDCTAB.
+    CLEAR LS_BDCTAB.
+  ELSE.
+    LS_BDCTAB-FNAM = PV_FNAM.             " 필드이름
+    LS_BDCTAB-FVAL = PV_FVAL.             " BDC 필드값
 
-  CLEAR: LV_VALIDFROM.
-  CLEAR: LV_VALIDTO.
+    APPEND LS_BDCTAB TO GT_BDCTAB.
+    CLEAR LS_BDCTAB.
+  ENDIF.
 
+ENDFORM.                    " BDC_DYNPRO_PROC
+
+*&---------------------------------------------------------------------*
+*&      Form  MAKE_RESULT
+*&---------------------------------------------------------------------*
+*       BDC 처리결과 구성
 *----------------------------------------------------------------------*
-* 손익센터 정보 구성
-*----------------------------------------------------------------------*
+FORM MAKE_RESULT .
 
-  LS_BASICDATA-PRCTR_NAME      = GS_OUTTAB-KTEXT.           " 일반이름
-  LS_BASICDATA-LONG_TEXT       = GS_OUTTAB-LTEXT.           " 설명
-  LS_BASICDATA-IN_CHARGE       = GS_OUTTAB-VERAK.           " 손익센터 책임자
-  LS_BASICDATA-PRCTR_HIER_GRP  = GS_OUTTAB-KHINR.           " 손익센터영역
-
-  LV_VALIDFROM  = GS_OUTTAB-DATAB.                          " Valid-from date
-  LV_VALIDTO    = GS_OUTTAB-DATBI.                          " Valid-to date
-
-* Update Field Marking
-  LS_BASICDATAX = 'XXXXXXXX'.
-  LS_ADDRESSX   = 'XXXXXXXXXXXXXX'.
-
-*----------------------------------------------------------------------*
-*  손익센터 생성
-*----------------------------------------------------------------------*
-*...Change Profit Center
-  CALL FUNCTION 'BAPI_PROFITCENTER_CHANGE'
-    EXPORTING
-      PROFITCENTER    = GS_OUTTAB-PRCTR
-      CONTROLLINGAREA = GS_BUKRS-KOKRS
-      VALIDFROM       = LV_VALIDFROM
-      VALIDTO         = LV_VALIDTO
-      BASICDATA       = LS_BASICDATA
-      ADDRESS         = LS_ADDRESS
-      TESTRUN         = ''
-      BASICDATAX      = LS_BASICDATAX
-      ADDRESSX        = LS_ADDRESSX
-    IMPORTING
-      RETURN          = LS_RETURN.
-
-*----------------------------------------------------------------------*
-*  결과 처리
-*----------------------------------------------------------------------*
   MOVE-CORRESPONDING GS_OUTTAB TO GS_RESULT.
 
-  GS_RESULT-NATXT = LS_RETURN-MESSAGE.
-
-* 오류
-  IF ( LS_RETURN-TYPE = 'E' ).
-    CALL FUNCTION 'BAPI_TRANSACTION_ROLLBACK'.
-
+  IF ( GV_MSGTYP = 'S' ).
     GS_RESULT-STATU = ICON_LED_GREEN.
-* 정상
   ELSE.
-    CALL FUNCTION 'BAPI_TRANSACTION_COMMIT'.
-
     GS_RESULT-STATU = ICON_LED_RED.
   ENDIF.
+
+  CALL FUNCTION 'MESSAGE_TEXT_BUILD'
+    EXPORTING
+      MSGID               = GS_BDCMSG-MSGID
+      MSGNR               = GS_BDCMSG-MSGNR
+      MSGV1               = GS_BDCMSG-MSGV1
+      MSGV2               = GS_BDCMSG-MSGV2
+      MSGV3               = GS_BDCMSG-MSGV3
+      MSGV4               = GS_BDCMSG-MSGV4
+    IMPORTING
+      MESSAGE_TEXT_OUTPUT = GV_MSGTXT.
+
+  GS_RESULT-NATXT = GV_MSGTXT.
 
   APPEND GS_RESULT TO GT_RESULT.
   CLEAR: GS_RESULT.
